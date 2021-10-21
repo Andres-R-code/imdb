@@ -1,7 +1,7 @@
 # IMDB REST API
 [![N|Solid](https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg)](https://imdb3.herokuapp.com/api-docs/)
 
-[![build status](https://img.shields.io/circleci/project/github/PokeAPI/pokeapi/master.svg)](https://imdb3.herokuapp.com/api/v1/) [![data status](https://img.shields.io/circleci/build/github/PokeAPI/api-data?label=data)](https://imdb3.herokuapp.com/api/v1/api-data)
+Deploy: [imdb4.com/api](https://imdb4.herokuapp.com/api-docs/) 
 
 ## _Access metadata for some movies, TV series, actors, and directors.
 
@@ -49,7 +49,7 @@ npm start
 | Googleapis | [][PlSq] |
 | Nodemailer | [][PlSq] |
 | Supertest | [][PlSq] |
-| Supertest | [][PlSq] |
+
 
 ## Docker
 
