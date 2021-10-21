@@ -1,0 +1,659 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "IMDb REST API",
+        "version": "1.0",
+        "description": "REST API to watch movies information"
+    },
+    "servers": [
+        {
+            "url": "https://imdb4.herokuapp.com/api/v1",
+            "description": "Production"
+        },
+        {
+            "url": "http://localhost:8000/api/v1",
+            "description": "Development"
+        }
+    ],
+    "paths": {
+        "/users":{
+            "post":{
+                "description": "To add a new user. It sends a email to verify the email address and activate the user",
+                "responses": {
+                    "201":{
+                        "description": "User added correctly"
+                    },
+                    "409":{
+                        "description": "The user already exists"
+                    }
+                },
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Users"
+                            }
+                        }
+                    }
+                },
+                "tags": ["Users"]
+            },
+            "get": {
+                "description": "To get the data of the logged user",
+                "responses": {
+                    "200":{
+                        "description": "User gotten correctly"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Users"]
+            },
+            "delete": {
+                "description": "To delete the logged user",
+                "responses": {
+                    "200":{
+                        "description": "User deleted"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Users"]
+            },
+            "put": {
+                "description": "To update he current user",
+                "responses": {
+                    "200":{
+                        "description": "User updated"
+                    }
+                },
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Users"
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Users"]
+            }
+        },
+        "/login":{
+            "post":{
+                "description": "To login and generate a new Token",
+                "responses": {
+                    "201":{
+                        "description": "Logged correctly"
+                    }
+                },
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "tags": ["Users"]
+            }
+        },
+        "/actors/?offset={offset}&limit={limit}":{
+            "get":{
+                "description": "To get all actors. Offset = 0 and limit = 20 by default",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "offset", "schema": {"type": "integer"}},
+                    {"in": "path", "required": true, "name": "limit", "schema": {"type": "integer"}}
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Actors have been gotten correctly"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Actors"]
+            }
+        },
+        "/actors":{
+            "post":{
+                "description": "To add a new actor",
+                "responses": {
+                    "201":{
+                        "description": "Actor added correctly"
+                    }
+                },
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Actors"
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Actors"]
+            }
+        },
+        "/actors/{id}":{
+            "get": {
+                "description": "To get an particular actor",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Actor gotten correctly"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Actors"]
+            },
+            "delete": {
+                "description": "To delete an actor",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Actor deleted"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Actors"]
+            },
+            "put": {
+                "description": "To update an actor",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Actor updated"
+                    }
+                },
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Actors"
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Actors"]
+            }
+        },
+        "/directors/?offset={offset}&limit={limit}":{
+            "get":{
+                "description": "To get all directors. Offset = 0 and limit = 20 by default",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "offset", "schema": {"type": "integer"}},
+                    {"in": "path", "required": true, "name": "limit", "schema": {"type": "integer"}}
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Directors have been gotten correctly"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Directors"]
+            }
+        },
+        "/directors":{
+            "post":{
+                "description": "To add a new director",
+                "responses": {
+                    "201":{
+                        "description": "Director added correctly"
+                    }
+                },
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Directors"
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Directors"]
+            }
+        },
+        "/directors/{id}":{
+            "get": {
+                "description": "To get an particular director",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Director gotten correctly"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Directors"]
+            },
+            "delete": {
+                "description": "To delete an director",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Director deleted"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Directors"]
+            },
+            "put": {
+                "description": "To update an director",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Director updated"
+                    }
+                },
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Directors"
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Directors"]
+            }
+        },
+        "/genres/?offset={offset}&limit={limit}":{
+            "get":{
+                "description": "To get all genres. Offset = 0 and limit = 20 by default",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "offset", "schema": {"type": "integer"}},
+                    {"in": "path", "required": true, "name": "limit", "schema": {"type": "integer"}}
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Genres have been gotten correctly"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Genres"]
+            }
+        },
+        "/genres":{
+            "post":{
+                "description": "To add a new genre",
+                "responses": {
+                    "201":{
+                        "description": "Genre added correctly"
+                    }
+                },
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Genres"
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Genres"]
+            }
+        },
+        "/genres/{id}":{
+            "get": {
+                "description": "To get a particular genre",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Genre gotten correctly"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Genres"]
+            },
+            "delete": {
+                "description": "To delete a genre",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Genre deleted"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Genres"]
+            },
+            "put": {
+                "description": "To update a genre",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Genre updated"
+                    }
+                },
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Genres"
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Genres"]
+            }
+        },
+        "/contents/?offset={offset}&limit={limit}":{
+            "get":{
+                "description": "To get all Contents. Offset = 0 and limit = 20 by default",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "offset", "schema": {"type": "integer"}},
+                    {"in": "path", "required": true, "name": "limit", "schema": {"type": "integer"}}
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Contents have been gotten correctly"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Contents (movies and series)"]
+            }
+        },
+        "/contents":{
+            "post":{
+                "description": "To add a new content (movies and series)",
+                "responses": {
+                    "201":{
+                        "description": "Content added correctly"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Contents"
+                            }
+                        }
+                    }
+                },
+                "tags": ["Contents (movies and series)"]
+            }
+        },
+        "/contents/{id}":{
+            "get": {
+                "description": "To get a particular content",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Content gotten correctly"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Contents (movies and series)"]
+            },
+            "delete": {
+                "description": "To delete a content",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Content deleted"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "tags": ["Contents (movies and series)"]
+            },
+            "put": {
+                "description": "To update a content",
+                "parameters":[
+                    {"in": "path", "required": true, "name": "id", "schema": {"type": "integer"}}
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Content updated"
+                    }
+                },
+                "security": [{
+                    "jwt_token": []
+                }],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Contents"
+                            }
+                        }
+                    }
+                },
+                "tags": ["Contents (movies and series)"]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "jwt_token":{
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "Actors":{
+                "properties":{
+                    "firstname":{
+                        "type": "string",
+                        "example": "Tom"
+                    },
+                    "lastname":{
+                        "type": "string",
+                        "example": "Cruise"
+                    },
+                    "dob": {
+                        "type": "string",
+                        "description": "date of birthday (YYYY-MM-DD)",
+                        "example": "1962-07-03"
+                    },
+                    "biography": {
+                        "type": "string",
+                        "example": "Thomas Cruise Mapother IV is an American actor and produces. He has received various accolades for his work. He is one of the highest-apid actors in the world."
+                    },
+                    "profile_photo":{
+                        "type": "string",
+                        "description": "URL to the actor photo",
+                        "example": "https://images.mubicdn.net/images/cast_member/2184/cache-2992-1547409411/image-w856.jpg?size=800x"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Directors":{
+                    "properties":{
+                        "firstname":{
+                            "type": "string",
+                            "example": "Anthony"
+                        },
+                        "lastname":{
+                            "type": "string",
+                            "example": "Russo"
+                        },
+                        "dob": {
+                            "type": "string",
+                            "description": "date of birthday (YYYY-MM-DD)",
+                            "example": "1970-02-03"
+                        },
+                        "biography": {
+                            "type": "string",
+                            "example": "Anthony Russo is a producer and director, known for Avengers: Endgame (2019), Captain America and the winter soldier(2014) and Avengers: Infinity War (2018). "
+                        },
+                        "profile_photo":{
+                            "type": "string",
+                            "description": "URL to the director photo",
+                            "example": "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/4/47/Anthony_Russo.png/revision/latest?cb=20190626172010&path-prefix=es"
+                        },
+                        "active": {
+                            "type": "boolean"
+                        }
+                    }
+            },
+            "Genres":{
+                "properties":{
+                    "name":{
+                        "type": "string",
+                        "example": "Comedy"
+                    }
+                }
+            },
+            "Contents":{
+                "properties":{
+                    "title":{
+                        "type": "string",
+                        "example": "Rambo: first blood"
+                    },
+                    "description":{
+                        "type": "string",
+                        "example": "A veteran Green Beret is forced by a cruel Sheriff and his deputies to flee into the mountains and wage an escalating one-man war against his pursuers."
+                    },
+                    "total_seasons": {
+                        "type": "integer",
+                        "description": "If it isn't a TV serie, put 0",
+                        "example": 0
+                    },
+                    "imdb_score": {
+                        "type": "number",
+                        "example": 7.7
+                    },
+                    "relase_date": {
+                        "type": "string",
+                        "description": "(YYYY-MM-DD)",
+                        "example": "1982-10-22"
+                    },
+                    "play_time": {
+                        "type": "integer",
+                        "description": "Duration in minutes",
+                        "example": 93
+                    },
+                    "photo_link": {
+                        "type": "string",
+                        "example": "https://m.media-amazon.com/images/M/MV5BODBmOWU2YWMtZGUzZi00YzRhLWJjNDAtYTUwNWVkNDcyZmU5XkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_UX182_CR0,0,182,268_AL_.jpg"
+                    },
+                    "imdb_link": {
+                        "type": "string",
+                        "example": "https://www.imdb.com/title/tt0083944/"
+                    },
+                    "actors": {
+                        "type": "array",
+                        "description": "array with the actor's id who participated in the movie",
+                        "example": [2]
+                    },
+                    "directors": {
+                        "type": "array",
+                        "description": "array with the director's id who participated in the movie",
+                        "example": [10]
+                    },
+                    "genres": {
+                        "type": "array",
+                        "description": "array with the director's id of the movie",
+                        "example": [2, 6]
+                    }
+                }
+            },
+            "Users":{
+                "properties":{
+                    "firstname":{
+                        "type": "string",
+                        "example": "Pablo"
+                    },
+                    "lastname":{
+                        "type": "string",
+                        "example": "Brown"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "pablo@hotmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "pablo123"
+                    }
+                }
+            },
+            "Login":{
+                "properties": {
+                    "email":{
+                        "type": "string",
+                        "example": "juan@hotmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "juan123"
+                    }
+                }
+            }
+        }
+    }
+}
