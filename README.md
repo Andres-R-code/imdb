@@ -1,7 +1,7 @@
 # IMDB REST API
-[![N|Solid](https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg)](https://imdb3.herokuapp.com/api-docs/)
+[![N|Solid](https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg)](https://imbd-api.herokuapp.com/api-docs/)
 
-Deploy: [imdb4.com/api](https://imdb4.herokuapp.com/api-docs/) 
+Deploy: [imdb4.com/api](https://imbd-api.herokuapp.com/api-docs/) 
 
 ## _Access metadata for some movies, TV series, actors, and directors.
 
